@@ -1,38 +1,42 @@
-import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import SignUpForm from "./components/auth/SignUpForm";
+import SignInForm from "./components/auth/SignInForm";
+import { useState } from "react";
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
-const supabase = createClient("https://qcmoxylqpfgizlknsnop.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjbW94eWxxcGZnaXpsa25zbm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1Mjk5NDYsImV4cCI6MjA1MTEwNTk0Nn0.IXax6J7ncbEgisfUoR_IS0vYsbUyfG8lpf0iK5uF5Lk")
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('access_token');
+  };
   return (
-    <>
+    <Router>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Welcome to the Todo App</h1>
+        {isLoggedIn ? (
+          <div>
+            <p>You're logged in!</p>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <div>
+            <p>You are not logged in. Please log in or sign up!</p>
+            <Routes>
+              <Route path="/sign-up" element={<SignUpForm />} />
+              <Route path="/sign-in" element={<SignInForm />} />
+              <Route path="/" element={<Link to="/sign-in">Go to Login</Link>} />
+            </Routes>
+          </div>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
