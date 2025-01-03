@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
+
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+
+const supabase = createClient("https://qcmoxylqpfgizlknsnop.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjbW94eWxxcGZnaXpsa25zbm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1Mjk5NDYsImV4cCI6MjA1MTEwNTk0Nn0.IXax6J7ncbEgisfUoR_IS0vYsbUyfG8lpf0iK5uF5Lk")
 
 function App() {
   const [count, setCount] = useState(0)
