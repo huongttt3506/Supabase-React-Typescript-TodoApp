@@ -2,38 +2,37 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import SignUpForm from "./components/auth/SignUpForm";
 import SignInForm from "./components/auth/SignInForm";
 import { useState } from "react";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<{ email: string | null } | null>(null);
 
-  const handleLogin = () => {
+  const handleLogin = (user: { email: string | null }) => {
     setIsLoggedIn(true);
+    setCurrentUser(user);
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setCurrentUser(null);
     localStorage.removeItem('access_token');
   };
   return (
     <Router>
       <div>
-        <h1>Welcome to the Todo App</h1>
-        {isLoggedIn ? (
-          <div>
-            <p>You're logged in!</p>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        ) : (
-          <div>
-            <p>You are not logged in. Please log in or sign up!</p>
-            <Routes>
+        <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} user={currentUser} />
+        <main>
+          <Routes>
+              <Route path="/" element={<SignInForm onLogin={handleLogin} />} />
               <Route path="/sign-up" element={<SignUpForm />} />
-              <Route path="/sign-in" element={<SignInForm />} />
-              <Route path="/" element={<Link to="/sign-in">Go to Login</Link>} />
-            </Routes>
-          </div>
-        )}
+              <Route path="/tasks" element={<Link to="/sign-in">Go to Login</Link>} />
+          </Routes>
+
+        </main>
+        <Footer />
       </div>
     </Router>
   );

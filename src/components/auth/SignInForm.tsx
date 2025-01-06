@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { signIn } from '../../api/Auth';
 import { Link } from 'react-router-dom';
 
-export const SignInForm = () => {
+export const SignInForm = ({ onLogin } : { onLogin: (user: {email: string | null}) => void }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -15,6 +15,8 @@ export const SignInForm = () => {
 
             //save accessToken
             localStorage.setItem('access_token', accessToken || '');
+            localStorage.setItem('refresh_token', refreshToken)
+            onLogin({email: user?.email ?? null});
         } catch (error: any) {
             setMessage(`Login failed: ${error.message}`);
         }
