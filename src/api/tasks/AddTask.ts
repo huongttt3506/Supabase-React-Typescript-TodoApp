@@ -11,7 +11,7 @@ const addTask = async (
         user_id: userId,
         title,
         description,
-        due_date: dueDate.toISOString();
+        due_date: dueDate.toISOString(),
         completed: false,
     }
    ]);
