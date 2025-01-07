@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
+# React TODO web app
+A simple todo web app built with ReactJS in TypeScript. Basically a PoC on a React SPA with Supabase as its backend.
+## Features
+- Sign up, sign in.
+- Add, delete task.
+- Mark tasks as completed.
+- Supabase integration for storing tasks.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Screenshots
+### UI of the Todo App
+![Todo App UI](src/assets/todo-app-ui1.png)  
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Todo App UI](src/assets/todo-app-ui2.png)  
 
-## Expanding the ESLint configuration
+### Supabase Integration
+![Supabase Table](src/assets/supabase-table.png) 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
+- **ReactJS** with **TypeScript**
+- **Supabase** for backend and authentication
+- **Material UI** for UI
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## How to run
+Clone from the local branch
+```bash
+git clone https://github.com/huongttt3506/Supabase-React-Typescript-TodoApp
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Install dependencies then start the app in one terminal..
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+Run the app
+```bash
+npm run dev
+```
+
+Access http://localhost:5173 in your browser
+
+## Configuration
+Set up your Supabase account and create a new project.
+Add your Supabase URL and API Key to the environment variables or configuration files (e.g., .env file) based on the project setup.
+
+
+
+
+
+
+
+
